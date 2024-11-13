@@ -33,6 +33,9 @@ public class GameActivity extends AppCompatActivity {
     public TextView answerPaintingName;
     public TextView answerArtistName;
     public TextView answerDescription;
+    private Button backButton;
+    private Button homeButton;
+
     AlertDialog gameEndDialog;
 
     // Controller
@@ -58,6 +61,8 @@ public class GameActivity extends AppCompatActivity {
         answerPaintingName = findViewById(R.id.answerPaintingName);
         answerArtistName = findViewById(R.id.answerArtistName);
         answerDescription = findViewById(R.id.answerDescription);
+        backButton = findViewById(R.id.backButton);
+        homeButton = findViewById(R.id.homeButton);
 
         // Get intent data
         Intent intent = getIntent();
@@ -73,13 +78,29 @@ public class GameActivity extends AppCompatActivity {
             controller.advanceGame();
         });
 
+        // Back Button
+        backButton.setOnClickListener(v -> {
+            finishOk();
+        });
+
+        // Home Button
+        homeButton.setOnClickListener(v -> {
+            finishOk();
+        });
+
         // Start game after initialization
         controller.startGame(playerName);
+
     }
 
     public void showEndScreen(int points) {
         gameEndDialog = createGameEndDialog(points);
         gameEndDialog.show();
+    }
+
+    private void finishOk() {
+        setResult(RESULT_OK);
+        finish();
     }
 
     AlertDialog createGameEndDialog(int points) {

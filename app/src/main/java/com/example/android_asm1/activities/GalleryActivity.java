@@ -3,6 +3,7 @@ package com.example.android_asm1.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,12 +29,15 @@ import java.util.ArrayList;
 public class GalleryActivity extends AppCompatActivity implements GalleryAdapter.OnClickListener {
     public static int LAUNCH_DETAIL = 102;
     public static int UPDATE_NEEDED = 505;
+    public static int SKIP_ON_FINISH = 403;
     private TextView unlockedCount;
     private LinearLayout noPaintingsContainer;
     private LinearLayout galleryContainer;
     private GridView gridView;
     private GalleryAdapter adapter;
     private ArrayList<Painting> paintings;
+    private Button backButton;
+    private Button homeButton;
 
 
     @Override
@@ -42,10 +46,25 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gallery);
 
+        // Initialization
         unlockedCount = findViewById(R.id.unlockedCount);
         gridView = findViewById(R.id.gridView);
         noPaintingsContainer = findViewById(R.id.noPaintingsContainer);
         galleryContainer = findViewById(R.id.galleryContainer);
+        backButton = findViewById(R.id.backButton);
+        homeButton = findViewById(R.id.homeButton);
+
+
+        // Back Button
+        backButton.setOnClickListener(v -> {
+            finishOk();
+        });
+
+        // Home Button
+        homeButton.setOnClickListener(v -> {
+            finishOk();
+        });
+
 
         paintings = PaintingManager.getUnlockedList();
 
@@ -87,6 +106,11 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
         galleryContainer.setVisibility(View.VISIBLE);
     }
 
+    private void finishOk() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
     @Override
     public void onClick(int id) {
         Intent intent = new Intent(GalleryActivity.this, DetailedPaintingActivity.class);
@@ -101,6 +125,11 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
         if (requestCode == LAUNCH_DETAIL) {
             if (resultCode == UPDATE_NEEDED) {
                 updateGridView();
+                return;
+            }
+
+            if (resultCode == SKIP_ON_FINISH) {
+                finishOk();
             }
         }
     }

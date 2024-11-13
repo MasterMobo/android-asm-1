@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,9 @@ public class DetailedPaintingActivity extends AppCompatActivity {
     private ImageView favoriteHeart;
     private ImageView noFavoriteHeart;
     private Painting painting;
+    private TextView headerLabel;
+    private Button backButton;
+    private Button homeButton;
     private boolean galleryUpdateNeeded = false;
 
     @Override
@@ -58,12 +62,26 @@ public class DetailedPaintingActivity extends AppCompatActivity {
         paintingDescription = findViewById(R.id.paintingDescription);
         favoriteHeart = findViewById(R.id.favoriteHeart);
         noFavoriteHeart = findViewById(R.id.noFavoriteHear);
+        headerLabel = findViewById(R.id.headerLabel);
+        backButton = findViewById(R.id.backButton);
+        homeButton = findViewById(R.id.homeButton);
 
         paintingImage.setImageResource(painting.getResourceId());
+        headerLabel.setText(painting.getDisplayName());
         paintingName.setText(painting.getDisplayName());
         paintingYear.setText(painting.getDisplayYear());
         artistName.setText(painting.getArtistLabel());
         paintingDescription.setText(painting.getDescription());
+
+        backButton.setOnClickListener(v -> {
+            setResult(RESULT_OK);
+            finish();
+        });
+
+        homeButton.setOnClickListener(v -> {
+            setResult(GalleryActivity.SKIP_ON_FINISH);
+            finish();
+        });
 
         favoriteHeart.setOnClickListener(v -> {
             painting.setFavourite(false);
@@ -78,6 +96,7 @@ public class DetailedPaintingActivity extends AppCompatActivity {
         });
 
         updateFavoriteStatus();
+
 
         // Set up a custom back press callback
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {

@@ -3,6 +3,7 @@ package com.example.android_asm1.activities;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -23,6 +24,8 @@ public class HistoryActivity extends AppCompatActivity implements  GameHistoryAd
     private ListView listView;
     private GameHistoryAdapter adapter;
     private LinearLayout noHistoryContainer;
+    private Button backButton;
+    private Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +33,21 @@ public class HistoryActivity extends AppCompatActivity implements  GameHistoryAd
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_history);
 
+        // Initialization
         listView = findViewById(R.id.historyList);
         noHistoryContainer = findViewById(R.id.noHistoryContainer);
+        backButton = findViewById(R.id.backButton);
+        homeButton = findViewById(R.id.homeButton);
+
+        // Back Button
+        backButton.setOnClickListener(v -> {
+            finishOk();
+        });
+
+        // Home Button
+        homeButton.setOnClickListener(v -> {
+            finishOk();
+        });
 
         // Create and set the adapter
         ArrayList<GameHistory> gameHistories = GameHistoryManager.getHistoryList();
@@ -54,6 +70,11 @@ public class HistoryActivity extends AppCompatActivity implements  GameHistoryAd
     private void showList() {
         noHistoryContainer.setVisibility(View.GONE);
         listView.setVisibility(View.VISIBLE);
+    }
+
+    private void finishOk() {
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override

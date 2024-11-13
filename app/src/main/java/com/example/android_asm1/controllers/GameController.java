@@ -105,6 +105,6 @@ public class GameController {
     }
 
     private void updateRoundCounter() {
-        activity.roundCounter.setText(model.getCurrentRound() + "/" + model.getTotalRounds());
+        activity.roundCounter.setText("Round: " + model.getCurrentRound() + "/" + model.getTotalRounds());
     }
 }
