@@ -74,8 +74,7 @@ public class DetailedPaintingActivity extends AppCompatActivity {
         paintingDescription.setText(painting.getDescription());
 
         backButton.setOnClickListener(v -> {
-            setResult(RESULT_OK);
-            finish();
+            finishAndUpdateGallery();
         });
 
         homeButton.setOnClickListener(v -> {
@@ -102,12 +101,7 @@ public class DetailedPaintingActivity extends AppCompatActivity {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (galleryUpdateNeeded) {
-                    setResult(GalleryActivity.UPDATE_NEEDED);
-                } else {
-                    setResult(RESULT_OK);
-                }
-                finish();
+                finishAndUpdateGallery();
             }
         };
 
@@ -131,6 +125,16 @@ public class DetailedPaintingActivity extends AppCompatActivity {
     private void showNotFavorite() {
         favoriteHeart.setVisibility(View.GONE);
         noFavoriteHeart.setVisibility(View.VISIBLE);
+    }
+
+
+    private void finishAndUpdateGallery() {
+        if (galleryUpdateNeeded) {
+            setResult(GalleryActivity.UPDATE_NEEDED);
+        } else {
+            setResult(RESULT_OK);
+        }
+        finish();
     }
 
 }
