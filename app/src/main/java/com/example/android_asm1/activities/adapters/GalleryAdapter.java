@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,9 +53,15 @@ public class GalleryAdapter extends BaseAdapter {
         Painting painting = paintings.get(position);
         ImageView galleryImage = convertView.findViewById(R.id.galleryImage);
         TextView galleryTitle = convertView.findViewById(R.id.galleryTitle);
+        ImageView favoriteHeart = convertView.findViewById(R.id.favoriteHeart);
 
         galleryImage.setImageResource(painting.getResourceId());
         galleryTitle.setText(painting.getDisplayName());
+        if (painting.isFavorite()) {
+            favoriteHeart.setVisibility(View.VISIBLE);
+        } else {
+            favoriteHeart.setVisibility(View.GONE);
+        }
 
         galleryImage.setOnClickListener(v -> {
             onClickListener.onClick(painting.getId());

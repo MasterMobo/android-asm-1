@@ -17,6 +17,7 @@ public class Painting {
     private String description;
     private int resourceId;
     private boolean unlocked = false;
+    private boolean favourite = false;
 
     public Painting() {
     }
@@ -89,4 +90,13 @@ public class Painting {
     public void unlock() {
         unlocked = true;
     }
+
+    public boolean isFavorite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
+
 }

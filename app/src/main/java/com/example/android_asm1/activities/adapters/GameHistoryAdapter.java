@@ -1,6 +1,7 @@
 package com.example.android_asm1.activities.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.android_asm1.R;
 import com.example.android_asm1.models.game.GameHistory;
@@ -20,9 +22,10 @@ import java.util.Locale;
 
 public class GameHistoryAdapter extends ArrayAdapter<GameHistory> {
 
-    private Context context;
+    private Context context;                        // Context where this is rendered
     private ArrayList<GameHistory> gameHistoryList;
-    private DeleteListener deleteListener;
+    private DeleteListener deleteListener;          // Listener to notify when delete happens
+    private AlertDialog deleteDialog;               // Dialog to confirm/cancel delete
 
     public GameHistoryAdapter(@NonNull Context context, ArrayList<GameHistory> gameHistoryList, DeleteListener deleteListener) {
         super(context, 0, gameHistoryList);
@@ -38,28 +41,23 @@ public class GameHistoryAdapter extends ArrayAdapter<GameHistory> {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_game_history, parent, false);
         }
 
-        GameHistory gameHistory = getItem(position);
-
+        // Initialization
         TextView playerNameTextView = convertView.findViewById(R.id.player_name);
         TextView timeTextView = convertView.findViewById(R.id.time);
         TextView pointsTextView = convertView.findViewById(R.id.points);
         Button deleteButton = convertView.findViewById(R.id.deleteButton);
 
+        // Get current item
+        GameHistory gameHistory = getItem(position);
+
+        // Set correct view attributes
         playerNameTextView.setText(gameHistory.getPlayerName());
         timeTextView.setText(formatDate(gameHistory.getTime()));
         pointsTextView.setText(String.valueOf(gameHistory.getPoints() + " Points"));
 
+        // Delete button wiring
         deleteButton.setOnClickListener(v -> {
-            // Notify listener
-            if (deleteListener != null) {
-                deleteListener.onDelete(gameHistory.getId());
-            }
-
-            // Remove item from list
-            gameHistoryList.remove(position);
-
-            // Update list view to reflect change
-            notifyDataSetChanged();
+            showDeleteDialog(gameHistory.getId());
         });
 
         return convertView;
@@ -71,7 +69,51 @@ public class GameHistoryAdapter extends ArrayAdapter<GameHistory> {
         return dateFormat.format(date);
     }
 
+    // Listener to notify when delete happens
     public interface DeleteListener {
+        // Called when a delete on item with id is triggered
         void onDelete(int id);
+    }
+
+    // Displays the delete dialog
+    private void showDeleteDialog(int id) {
+        deleteDialog = createDeleteDialog(context, id);
+        deleteDialog.show();
+    }
+
+    // Called when user confirms a delete
+    private void onDeleteConfirm(int id) {
+        if (deleteListener == null) return;
+
+        // Notify listener
+        deleteListener.onDelete(id);
+
+        // Remove item from list
+        gameHistoryList.removeIf(history -> history.getId() == id);
+
+        // Update list view to reflect change
+        notifyDataSetChanged();
+    }
+
+    // Creates a new delete dialog
+    AlertDialog createDeleteDialog(Context context, int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage("Are you sure you want to delete this record?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onDeleteConfirm(id);
+                deleteDialog.hide();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteDialog.hide();
+            }
+        });
+
+        return builder.create();
     }
 }
