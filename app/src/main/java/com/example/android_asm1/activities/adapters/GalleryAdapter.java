@@ -52,11 +52,9 @@ public class GalleryAdapter extends BaseAdapter {
 
         Painting painting = paintings.get(position);
         ImageView galleryImage = convertView.findViewById(R.id.galleryImage);
-        TextView galleryTitle = convertView.findViewById(R.id.galleryTitle);
         ImageView favoriteHeart = convertView.findViewById(R.id.favoriteHeart);
 
         galleryImage.setImageResource(painting.getResourceId());
-        galleryTitle.setText(painting.getDisplayName());
         if (painting.isFavorite()) {
             favoriteHeart.setVisibility(View.VISIBLE);
         } else {
