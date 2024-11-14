@@ -16,7 +16,7 @@ public class Painting {
 
     private String description;
     private int resourceId;
-    private boolean unlocked = true;
+    private boolean unlocked = false;
     private boolean favourite = false;
 
     public Painting() {
