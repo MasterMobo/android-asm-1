@@ -229,5 +229,28 @@ public class PaintingManager {
                 R.drawable.christ_in_the_storm
         ));
 
+        add(factory.createWithYear(
+                "Portrait of Madame X",
+                "John Singer Sargent",
+                1884,
+                "Madame X or Portrait of Madame X is a portrait painting by John Singer Sargent of a young socialite, Virginie Amélie Avegno Gautreau, wife of the French banker Pierre Gautreau. Madame X was painted not as a commission, but at the request of Sargent. It is a study in opposition. Sargent shows a woman posing in a black satin dress with jeweled straps, a dress that reveals and hides at the same time. The portrait is characterized by the pale flesh tone of the subject contrasted against a dark-colored dress and background.\nThe scandal resulting from the painting's controversial reception at the Paris Salon of 1884 amounted to a temporary setback to Sargent while in France, though it may have helped him later establish a successful career in Britain and America.",
+                R.drawable.madame_x
+        ));
+
+        add(factory.createWithYear(
+                "The Fighting Temeraire",
+                "J. M. W. Turner",
+                1839,
+                "The Fighting Temeraire, tugged to her last berth to be broken up, 1838 is an oil-on-canvas painting by the English artist Joseph Mallord William Turner, painted in 1838 and exhibited at the Royal Academy in 1839.\nThe painting depicts the 98-gun HMS Temeraire, one of the last second-rate ships of the line to have played a role in the Battle of Trafalgar, being towed up the Thames by a paddle-wheel steam tug in 1838, towards its final berth in Rotherhithe to be broken up for scrap.\nThe painting hangs in the National Gallery, London, having been bequeathed to the nation by the artist in 1851, as part of the Turner Bequest. In a poll organised by BBC Radio 4's Today programme in 2005, it was voted the nation's favourite painting. In 2020 it was included on the new £20 banknote, along with the artist's 1799 self-portrait.",
+                R.drawable.the_fighting_temeraire
+        ));
+
+        add(factory.createWithYear(
+                "The Astronomer",
+                "Johannes Vermeer",
+                1668,
+                "The Astronomer (Dutch: De astronoom) is a painting finished in about 1668 by the Dutch Golden Age painter Johannes Vermeer. It is in oil on canvas with dimensions 51 cm × 45 cm (20 in × 18 in).\nPortrayals of scientists were a favourite topic in 17th-century Dutch painting and Vermeer's oeuvre includes both this astronomer and the slightly later The Geographer. Both are believed to portray the same man, possibly Antonie van Leeuwenhoek.[5] A 2017 study indicated that the canvas for the two works came from the same bolt of material, confirming their close relationship",
+                R.drawable.the_astronomer
+        ));
     }
 }
