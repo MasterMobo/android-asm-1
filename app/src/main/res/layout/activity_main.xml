@@ -7,6 +7,39 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-115dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wave" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-115dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/wave_1_" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-100dp"
+        android:alpha="0.3"
+        android:rotation="-5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/wave_1_" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -59,7 +92,7 @@
 
         <EditText
             android:id="@+id/playerNameInput"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="48dp"
             android:ems="10"
             android:hint="Enter a Name to Play"
@@ -67,25 +100,41 @@
 
         <Button
             android:id="@+id/playButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:backgroundTint="#01AAEC"
             android:text="Play"
+            android:textSize="20sp"
             app:icon="@drawable/play_button_svgrepo_com"
-            app:iconSize="20dp" />
+            app:iconSize="24dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <Button
             android:id="@+id/historyButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:layout_height="55dp"
+            android:backgroundTint="#45CDFF"
             android:text="history"
-            app:icon="@drawable/baseline_collections_bookmark_24" />
+            android:textSize="16sp"
+            app:icon="@drawable/baseline_collections_bookmark_24"
+            app:iconSize="24dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
         <Button
             android:id="@+id/galleryButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:layout_height="55dp"
+            android:backgroundTint="#44CBFD"
             android:text="Gallery"
-            app:icon="@drawable/baseline_image_24" />
+            android:textSize="16sp"
+            app:icon="@drawable/baseline_image_24"
+            app:iconSize="24dp" />
 
     </LinearLayout>
 
