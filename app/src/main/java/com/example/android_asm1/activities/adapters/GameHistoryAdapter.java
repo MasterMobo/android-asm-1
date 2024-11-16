@@ -23,7 +23,7 @@ import java.util.Locale;
 public class GameHistoryAdapter extends ArrayAdapter<GameHistory> {
 
     private Context context;                        // Context where this is rendered
-    private ArrayList<GameHistory> gameHistoryList;
+    private ArrayList<GameHistory> gameHistoryList; // List of GameHistory to be rendered
     private DeleteListener deleteListener;          // Listener to notify when delete happens
     private AlertDialog deleteDialog;               // Dialog to confirm/cancel delete
 

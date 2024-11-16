@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class GameModel {
-    private String playerName;
-    private int points;
-    private ArrayList<Painting> paintings;
-    private int currentPaintingIndex = 0;
-    private int rounds = 5;
+    // MVC pattern
+    // This class represents a single game
+
+    private String playerName;                  // Name of the player
+    private int points;                         // Current points of the game
+    private ArrayList<Painting> paintings;      // A list of paintings for the game. Randomly selected with length of rounds when game starts
+    private int currentPaintingIndex = 0;       // Index of the current painting in the paintings list
+    private int rounds = 5;                     // Number of rounds in the game
 
     private GameController controller;
 
@@ -25,17 +28,22 @@ public class GameModel {
         this.controller = controller;
     }
 
+    // Starts the game
+    // Reset (or initialize) game attributes, and pick new random paintings
     public void startGame(String playerName) {
         this.playerName = playerName;
+        points = 0;
         currentPaintingIndex = 0;
 
         PaintingPicker paintingPicker = new PaintingPicker(PaintingManager.getPaintingList());
 
-        paintings = paintingPicker.getRandomImages(rounds);
+        paintings = paintingPicker.getRandomPaintings(rounds);
 
         controller.onGameStarted();
     }
 
+    // Processes guess of player
+    // Increment points based on guess accuracy and unlocks new paintings
     public void submitGuess(int year) {
         Painting answer = getCurrentPainting();
 
@@ -45,11 +53,8 @@ public class GameModel {
         controller.onGuessSubmitted();
     }
 
-    public Painting getCurrentPainting() {
-        return paintings.get(currentPaintingIndex);
-    }
-
-
+    // Advances game to next round
+    // If game is over, calls finishGame()
     public void advance() {
         currentPaintingIndex++;
 
@@ -61,11 +66,17 @@ public class GameModel {
         controller.onGameAdvanced();
     }
 
+    // Finishes the game
+    // Add game to history
     public void finishGame() {
         GameHistory history = new GameHistory(playerName, points, new Date());
         GameHistoryManager.addHistory(history);
 
         controller.onGameFinished();
+    }
+
+    public Painting getCurrentPainting() {
+        return paintings.get(currentPaintingIndex);
     }
 
     public int getPoints() {
@@ -84,7 +95,7 @@ public class GameModel {
         return currentPaintingIndex + 1;
     }
 
-    // Calculate the score based on proximity
+    // Calculates the score based on proximity
     private int calculateScore(int targetYearStart, int targetYearEnd, int userGuess) {
 
         // If the guess is within the range, award 1000 points
@@ -101,7 +112,7 @@ public class GameModel {
         return calculateScore(targetYearEnd, userGuess);
     }
 
-    // Method to calculate the score based on proximity
+    // Calculates the score based on proximity
     public static int calculateScore(int targetYear, int userGuess) {
         // If the guess is the exact year, award 1000 points
         if (targetYear == userGuess) {

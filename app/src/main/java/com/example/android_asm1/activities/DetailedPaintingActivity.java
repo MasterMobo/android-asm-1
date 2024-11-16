@@ -40,6 +40,7 @@ public class DetailedPaintingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int paintingId = intent.getIntExtra("paintingId", -1);
 
+        // Missing intent data
         if (paintingId == -1) {
             Log.e("ERROR", "Invalid painting id");
             setResult(RESULT_CANCELED);
@@ -48,6 +49,7 @@ public class DetailedPaintingActivity extends AppCompatActivity {
 
         painting = PaintingManager.getPainting(paintingId);
 
+        // Invalid painting ID
         if (painting == null) {
             Log.e("ERROR", "Painting not found");
             setResult(RESULT_CANCELED);
@@ -97,7 +99,8 @@ public class DetailedPaintingActivity extends AppCompatActivity {
         updateFavoriteStatus();
 
 
-        // Set up a custom back press callback
+        // Custom back press callback to notify gallery of changes
+        // Avoid unreflected changes when user presses the OS' back button instead of the UIs
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {

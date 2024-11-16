@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 public class GalleryAdapter extends BaseAdapter {
 
-    private Context context;
-    private ArrayList<Painting> paintings;
-    private OnClickListener onClickListener;
+    private Context context;                    // Context where this is rendered
+    private ArrayList<Painting> paintings;      // List of Painting to be rendered
+    private OnClickListener onClickListener;    // Listener to notify when user clicks on the image
 
     public GalleryAdapter(@NonNull Context context, ArrayList<Painting> paintings, OnClickListener onClickListener) {
         this.context = context;
@@ -50,6 +50,7 @@ public class GalleryAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_gallery, parent, false);
         }
 
+        // Initialization
         Painting painting = paintings.get(position);
         ImageView galleryImage = convertView.findViewById(R.id.galleryImage);
         ImageView favoriteHeart = convertView.findViewById(R.id.favoriteHeart);
@@ -61,6 +62,7 @@ public class GalleryAdapter extends BaseAdapter {
             favoriteHeart.setVisibility(View.GONE);
         }
 
+        // Notify listener when clicked
         galleryImage.setOnClickListener(v -> {
             onClickListener.onClick(painting.getId());
         });

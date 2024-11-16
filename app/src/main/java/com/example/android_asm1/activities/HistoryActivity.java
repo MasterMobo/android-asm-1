@@ -58,6 +58,7 @@ public class HistoryActivity extends AppCompatActivity implements  GameHistoryAd
 
         showList();
 
+        // Set adapter
         adapter = new GameHistoryAdapter(this, gameHistories, this);
         listView.setAdapter(adapter);
     }

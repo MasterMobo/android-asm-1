@@ -8,8 +8,11 @@ import com.example.android_asm1.models.game.GameModel;
 import com.example.android_asm1.models.painting.Painting;
 
 public class GameController {
-    private GameModel model;
-    private GameActivity activity;
+    // MVC pattern
+    // Forward UI interactions to GameModel and control game UI updates from GameActivity
+
+    private GameModel model;        // Model
+    private GameActivity activity;  // View
 
     public GameController(GameActivity activity) {
         this.activity = activity;

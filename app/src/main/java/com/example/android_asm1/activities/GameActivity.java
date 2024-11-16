@@ -17,7 +17,9 @@ import com.example.android_asm1.R;
 import com.example.android_asm1.controllers.GameController;
 
 public class GameActivity extends AppCompatActivity {
-    // UI
+    // MVC pattern
+    // Renders the game
+
     public TextView playerNameView;
     public String playerName;
     public TextView roundCounter;

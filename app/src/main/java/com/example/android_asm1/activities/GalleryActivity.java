@@ -27,9 +27,17 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class GalleryActivity extends AppCompatActivity implements GalleryAdapter.OnClickListener {
+    // RESULT CODES
+    // Launch detailed painting activity
     public static int LAUNCH_DETAIL = 102;
+
+    // Need to update adapter to reflect changes.
+    // Used when user favorite/unfavorite a painting from the detailed activity
     public static int UPDATE_NEEDED = 505;
+
+    // Need to skip this activity and finish immediately
     public static int SKIP_ON_FINISH = 403;
+
     private TextView unlockedCount;
     private LinearLayout noPaintingsContainer;
     private LinearLayout galleryContainer;
@@ -83,12 +91,14 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
 
     private void updateGridView() {
         paintings = PaintingManager.getUnlockedList();
+
+        // Sort by favorite status
         paintings.sort((p1, p2) -> {
             // Prioritize favorite
             if (p1.isFavorite()) return -1;
             if (p2.isFavorite()) return 1;
 
-            // If both is not favorite, compare names
+            // If both are not favorite, compare names
             return p1.getDisplayName().compareTo(p2.getDisplayName());
         });
 

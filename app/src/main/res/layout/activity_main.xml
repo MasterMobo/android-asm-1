@@ -68,7 +68,7 @@
                 android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ArtGeussr"
+                android:text="ArtGuessr"
                 android:textAlignment="viewEnd"
                 android:textSize="48sp"
                 android:textStyle="bold" />

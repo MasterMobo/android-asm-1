@@ -1,7 +1,6 @@
 package com.example.android_asm1.models.painting;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 
 public class PaintingPicker {
@@ -13,12 +12,8 @@ public class PaintingPicker {
         this.random = new Random();
     }
 
-    public Painting getRandomImage() {
-        int randomIndex = random.nextInt(paintings.size());
-        return paintings.get(randomIndex);
-    }
-
-    public ArrayList<Painting> getRandomImages(int count) {
+    // Create a randomly selected array of length count from the list of paintings
+    public ArrayList<Painting> getRandomPaintings(int count) {
         ArrayList<Painting> selectionPool = (ArrayList<Painting>) paintings.clone();
         ArrayList<Painting> res = new ArrayList<>(count);
 
